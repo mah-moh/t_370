@@ -1,10 +1,25 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy 
+from mysql.connector import connect, Error
 
 app = Flask(__name__)
-db = SQLAlchemy(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+try:
+    with connect(
+        host="localhost",
+        user="root",
+        password="",
+        database="online_movie_rating",
+    ) as connection:
+        print(connection)
+        with connection.cursor() as cursor:
+            cursor.execute("SHOW DATABASES")
+            for db in cursor:
+                print(db)
+except Error as e:
+    print(e)
+
+
+
 
 if __name__ == '__main__':
     app.run()
