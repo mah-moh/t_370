@@ -11,6 +11,8 @@ def Admin():
         id = request.form.get("reg_no")
         data = db.read(id)
         return render_template('index.html', data=data[0])
+    if request.method == 'POST' and request.form.get["vaccinated"]:
+        pass
     return render_template('index.html')
 
 

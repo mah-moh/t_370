@@ -27,10 +27,15 @@
         </form>
     </div>
     {% if data %}
-        <div class="ui segment">
-            <h3>Name: {{data[1]}}</h3>
-            <h3>Rating: {{data[2]}}</h3>
-        </div>
+        <form method="POST">
+            <div class="ui segment">
+                <h3>Name: {{data[1]}}</h3>
+                <h3>Email: {{data[2]}}</h3>
+                <h3>Phone: {{data[3]}}</h3>
+                <h3>Vaccinated: {{data[5]}}</h3>
+                <button name="vaccinated" type='submit' class="ui primary button">Vaccinated!</button>
+            </div>
+        </form>
     {% endif %}
 
 </body>
