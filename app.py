@@ -1,25 +1,18 @@
-from flask import Flask
+from flask import Flask, render_template, request
 from mysql.connector import connect, Error
+from database import Database
 
 app = Flask(__name__)
+db = Database()
 
-try:
-    with connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="online_movie_rating",
-    ) as connection:
-        print(connection)
-        with connection.cursor() as cursor:
-            cursor.execute("SHOW DATABASES")
-            for db in cursor:
-                print(db)
-except Error as e:
-    print(e)
-
-
+@app.route('/', methods=['GET', 'POST'])
+def Admin():
+    if request.method == 'POST':
+        id = request.form.get("reg_no")
+        data = db.read(id)
+        return render_template('index.html', data=data[0])
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
