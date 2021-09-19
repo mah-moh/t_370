@@ -19,17 +19,16 @@ class Database:
 
             return cursor.fetchall()
         except:
-            return "not found"
+            return None
         finally:
             con.close()
 
-    def insert(self, data):
+    def update(self, id):
         con = Database.connect(self)
         cursor = con.cursor()
-
+        print(f"UPDATE movie_name SET name='yes' WHERE id = {id}")
         try:
-            cursor.execute("INSERT INTO movie_name(name, rating) VALUES(%s, %s)",
-                           (data['name'], data['rating'],))
+            cursor.execute(f"UPDATE movie_name SET name='yes' WHERE id = {id}")
             con.commit()
 
             return True
